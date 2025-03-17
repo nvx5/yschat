@@ -9,8 +9,6 @@ import { BANNER_HEIGHT } from '@/features/AlertBanner/CloudBanner';
 import { usePlatform } from '@/hooks/usePlatform';
 import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 
-import SideBar from './SideBar';
-
 const CloudBanner = dynamic(() => import('@/features/AlertBanner/CloudBanner'));
 
 const Layout = memo<PropsWithChildren>(({ children }) => {
@@ -31,7 +29,6 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
         }}
         width={'100%'}
       >
-        <SideBar />
         {children}
       </Flexbox>
     </>

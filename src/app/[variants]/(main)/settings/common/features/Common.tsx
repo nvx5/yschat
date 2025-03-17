@@ -1,14 +1,17 @@
 'use client';
 
 import { Form, type ItemGroup } from '@lobehub/ui';
-import { App, Button, Input } from 'antd';
+import { App, Button, Dropdown, Input, MenuProps } from 'antd';
 import isEqual from 'fast-deep-equal';
+import { ChevronDown } from 'lucide-react';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useSyncSettings } from '@/app/[variants]/(main)/settings/hooks/useSyncSettings';
 import { FORM_STYLE } from '@/const/layoutTokens';
 import { DEFAULT_SETTINGS } from '@/const/settings';
+import DataImporter from '@/features/DataImporter';
+import { configService } from '@/services/config';
 import { useChatStore } from '@/store/chat';
 import { useFileStore } from '@/store/file';
 import { useServerConfigStore } from '@/store/serverConfig';
@@ -21,7 +24,8 @@ import { settingsSelectors } from '@/store/user/selectors';
 type SettingItemGroup = ItemGroup;
 
 const Common = memo(() => {
-  const { t } = useTranslation('setting');
+  const { t } = useTranslation(['setting', 'common']);
+
   const [form] = Form.useForm();
 
   const showAccessCodeConfig = useServerConfigStore(serverConfigSelectors.enabledAccessCode);
@@ -74,6 +78,57 @@ const Common = memo(() => {
     });
   }, []);
 
+  const exportMenuItems: MenuProps['items'] = [
+    {
+      key: 'allAgent',
+      label: t('exportType.allAgent', { ns: 'common' }),
+      onClick: () => configService.exportAgents(),
+    },
+    {
+      key: 'allAgentWithMessage',
+      label: t('exportType.allAgentWithMessage', { ns: 'common' }),
+      onClick: () => configService.exportSessions(),
+    },
+    {
+      key: 'globalSetting',
+      label: t('exportType.globalSetting', { ns: 'common' }),
+      onClick: () => configService.exportSettings(),
+    },
+    {
+      key: 'divider',
+      type: 'divider',
+    },
+    {
+      key: 'all',
+      label: t('exportType.all', { ns: 'common' }),
+      onClick: () => configService.exportAll(),
+    },
+  ];
+
+  const data: SettingItemGroup = {
+    children: [
+      {
+        children: <DataImporter>{t('import', { ns: 'common' })}</DataImporter>,
+        desc: "Import agents, messages, and settings from a backup file",
+        label: "Import Configuration",
+        minWidth: undefined,
+      },
+      {
+        children: (
+          <Dropdown menu={{ items: exportMenuItems }}>
+            <Button type="primary">
+              {t('export', { ns: 'common' })} <ChevronDown size={14} style={{ marginLeft: 4 }} />
+            </Button>
+          </Dropdown>
+        ),
+        desc: "Export your data to a backup file that can be imported later",
+        label: "Export Configuration",
+        minWidth: undefined,
+      },
+    ],
+    title: "Data Management",
+  };
+
   const system: SettingItemGroup = {
     children: [
       {
@@ -118,7 +173,7 @@ const Common = memo(() => {
     <Form
       form={form}
       initialValues={settings}
-      items={[system]}
+      items={[data, system]}
       itemsType={'group'}
       onValuesChange={setSettings}
       variant={'pure'}

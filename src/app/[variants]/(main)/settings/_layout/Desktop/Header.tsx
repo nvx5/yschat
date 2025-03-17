@@ -3,7 +3,8 @@
 import { ActionIcon, ChatHeader, ChatHeaderTitle } from '@lobehub/ui';
 import { Drawer, type DrawerProps } from 'antd';
 import { createStyles } from 'antd-style';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { ReactNode, memo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -31,6 +32,7 @@ interface HeaderProps extends Pick<DrawerProps, 'getContainer'> {
 const Header = memo<HeaderProps>(({ children, getContainer, title }) => {
   const [open, setOpen] = useState(false);
   const { styles, theme } = useStyles();
+  const router = useRouter();
 
   return (
     <>
@@ -49,6 +51,15 @@ const Header = memo<HeaderProps>(({ children, getContainer, title }) => {
                 {title}
               </Flexbox>
             }
+          />
+        }
+        right={
+          <ActionIcon
+            color={theme.colorText}
+            icon={X}
+            onClick={() => router.push('/chat')}
+            size={{ blockSize: 32, fontSize: 18 }}
+            title="Close"
           />
         }
       />

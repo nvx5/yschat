@@ -7,25 +7,21 @@ import { useTranslation } from 'react-i18next';
 import { Center, Flexbox } from 'react-layout-kit';
 
 import { BRANDING_NAME } from '@/const/branding';
-import { isCustomBranding } from '@/const/version';
 import { useGreeting } from '@/hooks/useGreeting';
 import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-
-import AgentsSuggest from './AgentsSuggest';
-import QuestionSuggest from './QuestionSuggest';
 
 const useStyles = createStyles(({ css, responsive }) => ({
   container: css`
     align-items: center;
     ${responsive.mobile} {
-      align-items: flex-start;
+      align-items: center;
     }
   `,
   desc: css`
     font-size: 14px;
     text-align: center;
     ${responsive.mobile} {
-      text-align: start;
+      text-align: center;
     }
   `,
   title: css`
@@ -42,12 +38,11 @@ const useStyles = createStyles(({ css, responsive }) => ({
 const InboxWelcome = memo(() => {
   const { t } = useTranslation('welcome');
   const { styles } = useStyles();
-  const mobile = useServerConfigStore((s) => s.isMobile);
   const greeting = useGreeting();
-  const { showWelcomeSuggest, showCreateSession } = useServerConfigStore(featureFlagsSelectors);
+  const { showCreateSession } = useServerConfigStore(featureFlagsSelectors);
 
   return (
-    <Center padding={16} width={'100%'}>
+    <Center height="100vh" padding={16} width={'100%'}>
       <Flexbox className={styles.container} gap={16} style={{ maxWidth: 800 }} width={'100%'}>
         <Flexbox align={'center'} gap={8} horizontal>
           <FluentEmoji emoji={'👋'} size={40} type={'anim'} />
@@ -58,12 +53,6 @@ const InboxWelcome = memo(() => {
             appName: BRANDING_NAME,
           })}
         </Markdown>
-        {showWelcomeSuggest && (
-          <>
-            <AgentsSuggest mobile={mobile} />
-            {!isCustomBranding && <QuestionSuggest mobile={mobile} />}
-          </>
-        )}
       </Flexbox>
     </Center>
   );

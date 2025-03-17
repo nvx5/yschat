@@ -245,6 +245,17 @@
   "settingPlugin": {
     "title": "Plugin List"
   },
+  "settingData": {
+    "title": "Data Management",
+    "import": {
+      "title": "Import Configuration",
+      "desc": "Import agents, messages, and settings from a backup file"
+    },
+    "export": {
+      "title": "Export Configuration",
+      "desc": "Export your data to a backup file that can be imported later"
+    }
+  },
   "settingSystem": {
     "accessCode": {
       "desc": "Encryption access is enabled by the administrator",

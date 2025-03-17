@@ -1,7 +1,10 @@
 'use client';
 
+import { ActionIcon } from '@lobehub/ui';
 import { Tag } from 'antd';
 import { useResponsive } from 'antd-style';
+import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { memo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
@@ -21,6 +24,7 @@ const Layout = memo<LayoutProps>(({ children, category }) => {
   const { md = true } = useResponsive();
   const { t } = useTranslation('setting');
   const activeKey = useActiveSettingsKey();
+  const router = useRouter();
 
   return (
     <Flexbox
@@ -30,6 +34,21 @@ const Layout = memo<LayoutProps>(({ children, category }) => {
       style={{ position: 'relative' }}
       width={'100%'}
     >
+      {/* Fixed position close button at top right of screen */}
+      <div style={{ 
+        position: 'fixed', 
+        top: '16px', 
+        right: '16px', 
+        zIndex: 1000 
+      }}>
+        <ActionIcon
+          icon={X}
+          onClick={() => router.push('/chat')}
+          size={{ blockSize: 36, fontSize: 20 }}
+          title="Close"
+        />
+      </div>
+
       {md ? (
         <SideBar>{category}</SideBar>
       ) : (
