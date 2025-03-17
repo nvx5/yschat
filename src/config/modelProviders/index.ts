@@ -2,6 +2,7 @@ import { ChatModelCard, ModelProviderCard } from '@/types/llm';
 
 import Ai21Provider from './ai21';
 import Ai360Provider from './ai360';
+import AimlProvider from './aiml';
 import AnthropicProvider from './anthropic';
 import AzureProvider from './azure';
 import AzureAIProvider from './azureai';
@@ -54,6 +55,7 @@ import ZhiPuProvider from './zhipu';
  */
 export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   OpenAIProvider.chatModels,
+  AimlProvider.chatModels,
   QwenProvider.chatModels,
   ZhiPuProvider.chatModels,
   BedrockProvider.chatModels,
@@ -98,6 +100,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
 
 export const DEFAULT_MODEL_PROVIDER_LIST = [
   OpenAIProvider,
+  AimlProvider,
   { ...AzureProvider, chatModels: [] },
   AzureAIProvider,
   OllamaProvider,
@@ -158,6 +161,7 @@ export const isProviderDisableBrowserRequest = (id: string) => {
 
 export { default as Ai21ProviderCard } from './ai21';
 export { default as Ai360ProviderCard } from './ai360';
+export { default as AimlProviderCard } from './aiml';
 export { default as AnthropicProviderCard } from './anthropic';
 export { default as AzureProviderCard } from './azure';
 export { default as AzureAIProviderCard } from './azureai';

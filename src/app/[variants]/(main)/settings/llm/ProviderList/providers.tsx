@@ -46,11 +46,13 @@ import { useGithubProvider } from './Github';
 import { useHuggingFaceProvider } from './HuggingFace';
 import { useOllamaProvider } from './Ollama';
 import { useOpenAIProvider } from './OpenAI';
+import { useAimlProvider } from './AIML';
 
 export const useProviderList = (): ProviderItem[] => {
   const AzureProvider = useAzureProvider();
   const OllamaProvider = useOllamaProvider();
   const OpenAIProvider = useOpenAIProvider();
+  const AimlProvider = useAimlProvider();
   const BedrockProvider = useBedrockProvider();
   const CloudflareProvider = useCloudflareProvider();
   const GithubProvider = useGithubProvider();
@@ -59,6 +61,7 @@ export const useProviderList = (): ProviderItem[] => {
   return useMemo(
     () => [
       OpenAIProvider,
+      AimlProvider,
       AzureProvider,
       OllamaProvider,
       VLLMProviderCard,

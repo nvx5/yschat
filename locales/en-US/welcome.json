@@ -4,8 +4,8 @@
       "replaceBtn": "Replace Batch",
       "title": "New Assistant Recommendations:"
     },
-    "defaultMessage": "If you need a more professional or customized assistant, you can click `+` to create a custom assistant.",
-    "defaultMessageWithoutCreate": "If you need a more professional or customized assistant, you can click `+` to create a custom assistant.",
+    "defaultMessage": "If you need a more professional or customised assistant, you can click `+` to create a custom assistant.",
+    "defaultMessageWithoutCreate": "If you need a more professional or customised assistant, you can click `+` to create a custom assistant.",
     "qa": {
       "q01": "What is LobeHub?",
       "q02": "What is {{appName}}?",

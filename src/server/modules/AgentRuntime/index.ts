@@ -29,6 +29,15 @@ export interface AgentChatOptions {
 const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
   const llmConfig = getLLMConfig() as Record<string, any>;
 
+  // Add logging to debug AIML provider
+  if (provider === ModelProvider.AIML) {
+    console.log('AIML Provider Config:', {
+      apiKey: 'REDACTED',
+      baseURL: process.env.AIML_PROXY_URL,
+      modelList: process.env.AIML_MODEL_LIST,
+    });
+  }
+
   switch (provider) {
     default: {
       let upperProvider = provider.toUpperCase();
@@ -114,6 +123,13 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       const apiKey = apiKeyManager.pick(payload?.apiKey || TENCENT_CLOUD_API_KEY);
 
       return { apiKey };
+    }
+
+    case ModelProvider.AIML: {
+      const { AIML_API_KEY } = llmConfig;
+      const apiKey = apiKeyManager.pick(payload?.apiKey || AIML_API_KEY);
+      const baseURL = payload?.baseURL || process.env.AIML_PROXY_URL;
+      return baseURL ? { apiKey, baseURL } : { apiKey };
     }
   }
 };
