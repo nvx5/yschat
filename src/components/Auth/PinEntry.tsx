@@ -12,42 +12,28 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
   const [success, setSuccess] = useState(false);
   const correctPin = process.env.NEXT_PUBLIC_ACCESS_PIN || '1234';
 
+  // Simplified focus management
   useEffect(() => {
-    const firstInput = document.querySelector('#pin-0') as HTMLInputElement;
-    firstInput?.focus();
-
-    const preventFocusLoss = (e: MouseEvent) => {
-      e.preventDefault();
-      const currentFocusedInput = document.activeElement;
-      if (!currentFocusedInput?.id?.startsWith('pin-')) {
-        const lastFilledIndex = pin.indexOf('');
-        const targetInput = document.querySelector(
-          `#pin-${lastFilledIndex === -1 ? 3 : Math.max(0, lastFilledIndex)}`
-        ) as HTMLInputElement;
-        targetInput?.focus();
-      }
-    };
-
-    document.addEventListener('mousedown', preventFocusLoss);
-    document.addEventListener('click', preventFocusLoss);
-
-    return () => {
-      document.removeEventListener('mousedown', preventFocusLoss);
-      document.removeEventListener('click', preventFocusLoss);
-    };
-  }, [pin]);
-
-  useEffect(() => {
+    // Check authentication status first
     const isAuthenticated = sessionStorage.getItem('chatAuth');
     if (isAuthenticated === 'true') {
       onSuccess();
+      return;
+    }
+
+    // Only focus first input once on initial mount
+    const firstInput = document.getElementById('pin-0');
+    if (firstInput) {
+      (firstInput as HTMLInputElement).focus();
     }
   }, [onSuccess]);
 
   const clearPin = () => {
     setPin(['', '', '', '']);
-    const firstInput = document.querySelector('#pin-0') as HTMLInputElement;
-    firstInput?.focus();
+    const firstInput = document.getElementById('pin-0');
+    if (firstInput) {
+      (firstInput as HTMLInputElement).focus();
+    }
   };
 
   const handlePinChange = (index: number, value: string) => {
@@ -60,20 +46,18 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
     setPin(newPin);
 
     if (digit && index < 3) {
-      setTimeout(() => {
-        const nextInput = document.querySelector(`#pin-${index + 1}`) as HTMLInputElement;
-        nextInput?.focus();
-      }, 0);
+      const nextInput = document.getElementById(`pin-${index + 1}`);
+      if (nextInput) {
+        (nextInput as HTMLInputElement).focus();
+      }
     }
 
     if (index === 3 && digit) {
       const enteredPin = [...newPin.slice(0, 3), digit].join('');
       if (enteredPin === correctPin) {
         setSuccess(true);
-        setTimeout(() => {
-          sessionStorage.setItem('chatAuth', 'true');
-          onSuccess();
-        }, 300);
+        sessionStorage.setItem('chatAuth', 'true');
+        setTimeout(onSuccess, 300);
       } else {
         setError(true);
         clearPin();
@@ -83,7 +67,6 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
     if (e.key === 'Backspace' || e.key === 'Delete') {
-      e.preventDefault();
       clearPin();
     }
   };
@@ -120,4 +103,7 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
       </div>
     </div>
   );
-}; 
+};
+
+// Add default export for dynamic importing
+export default PinEntry; 
