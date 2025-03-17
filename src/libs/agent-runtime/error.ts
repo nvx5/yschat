@@ -15,6 +15,9 @@ export const AgentRuntimeErrorType = {
   InvalidProviderAPIKey: 'InvalidProviderAPIKey',
   ProviderBizError: 'ProviderBizError',
 
+  AimlBizError: 'AimlBizError',
+  AimlInvalidAPIKey: 'AimlInvalidAPIKey',
+
   InvalidOllamaArgs: 'InvalidOllamaArgs',
   OllamaBizError: 'OllamaBizError',
 

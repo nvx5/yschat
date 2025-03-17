@@ -1,5 +1,6 @@
 import { LobeAi21AI } from './ai21';
 import { LobeAi360AI } from './ai360';
+import { LobeAimlAI } from './aiml';
 import LobeAnthropicAI from './anthropic';
 import { LobeAzureOpenAI } from './azureOpenai';
 import { LobeAzureAI } from './azureai';
@@ -48,6 +49,7 @@ import { LobeZhipuAI } from './zhipu';
 export const providerRuntimeMap = {
   ai21: LobeAi21AI,
   ai360: LobeAi360AI,
+  aiml: LobeAimlAI,
   anthropic: LobeAnthropicAI,
   azure: LobeAzureOpenAI,
   azureai: LobeAzureAI,
@@ -94,3 +96,6 @@ export const providerRuntimeMap = {
   zeroone: LobeZeroOneAI,
   zhipu: LobeZhipuAI,
 };
+
+// Add logging after declaration
+console.log('Available providers in runtime map:', Object.keys(providerRuntimeMap));

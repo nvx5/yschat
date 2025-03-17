@@ -8,7 +8,8 @@ const getStatus = (errorType: ILobeAgentRuntimeErrorType | ErrorType) => {
   switch (errorType) {
     // TODO: Need to refactor to Invalid OpenAI API Key
     case AgentRuntimeErrorType.InvalidProviderAPIKey:
-    case AgentRuntimeErrorType.NoOpenAIAPIKey: {
+    case AgentRuntimeErrorType.NoOpenAIAPIKey:
+    case AgentRuntimeErrorType.AimlInvalidAPIKey: {
       return 401;
     }
 
@@ -36,7 +37,8 @@ const getStatus = (errorType: ILobeAgentRuntimeErrorType | ErrorType) => {
       return 470;
     }
 
-    case AgentRuntimeErrorType.ProviderBizError: {
+    case AgentRuntimeErrorType.ProviderBizError:
+    case AgentRuntimeErrorType.AimlBizError: {
       return 471;
     }
 
@@ -62,6 +64,8 @@ export const createErrorResponse = (
       `current StatusCode: \`${statusCode}\` .`,
       'Please go to `./src/app/api/errorResponse.ts` to defined the statusCode.',
     );
+    // Fallback to a valid status code if an invalid one is provided
+    return new Response(JSON.stringify(data), { status: 500 });
   }
 
   return new Response(JSON.stringify(data), { status: statusCode });
