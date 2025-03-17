@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { isRtlLang } from 'rtl-detect';
 
 import Analytics from '@/components/Analytics';
+import { AuthWrapper } from '@/components/Auth';
 import { DEFAULT_LANG } from '@/const/locale';
 import PWAInstall from '@/features/PWAInstall';
 import AuthProvider from '@/layout/AuthProvider';
@@ -39,8 +40,10 @@ const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
           primaryColor={primaryColor}
         >
           <AuthProvider>
-            {children}
-            {!isMobile && modal}
+            <AuthWrapper>
+              {children}
+              {!isMobile && modal}
+            </AuthWrapper>
           </AuthProvider>
           <PWAInstall />
         </GlobalProvider>
