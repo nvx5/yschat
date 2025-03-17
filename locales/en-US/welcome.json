@@ -4,8 +4,8 @@
       "replaceBtn": "Replace Batch",
       "title": "New Assistant Recommendations:"
     },
-    "defaultMessage": "I am your personal intelligent assistant {{appName}}. How can I assist you today?\nIf you need a more professional or customized assistant, you can click `+` to create a custom assistant.",
-    "defaultMessageWithoutCreate": "I am your personal intelligent assistant {{appName}}. How can I assist you today?",
+    "defaultMessage": "If you need a more professional or customized assistant, you can click `+` to create a custom assistant.",
+    "defaultMessageWithoutCreate": "If you need a more professional or customized assistant, you can click `+` to create a custom assistant.",
     "qa": {
       "q01": "What is LobeHub?",
       "q02": "What is {{appName}}?",
@@ -31,7 +31,7 @@
       "afternoon": "Good Afternoon",
       "morning": "Good Morning",
       "night": "Good Evening",
-      "noon": "Good Noon"
+      "noon": "Good Afternoon"
     }
   },
   "header": "Welcome",

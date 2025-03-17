@@ -72,7 +72,7 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
   };
 
   return (
-    <div style={{ alignItems: 'center', backgroundColor: '#000', display: 'flex', justifyContent: 'center', minHeight: '100vh' }}>
+    <div style={{ alignItems: 'center', backgroundColor: '#000', display: 'flex', justifyContent: 'center', minHeight: '100vh', width: '100vw' }}>
       <div style={{ backgroundColor: '#333', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', display: 'flex', gap: '12px', padding: '16px' }}>
         {pin.map((digit, index) => (
           <input
@@ -84,11 +84,11 @@ export const PinEntry = ({ onSuccess }: PinEntryProps) => {
             onChange={(e) => handlePinChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
             style={{
-              backgroundColor: '#222',
+              backgroundColor: '#0e0e0e',
               border: '2px solid',
-              borderColor: error ? '#f87171' : success ? '#34d399' : '#555',
+              borderColor: error ? '#2d2d2d' : success ? '#34d399' : '#555',
               borderRadius: '4px',
-              color: error ? '#f87171' : success ? '#34d399' : '#fff',
+              color: error ? '#2d2d2d' : success ? '#34d399' : '#fff',
               fontSize: '1.25rem',
               height: '48px',
               outline: 'none',
