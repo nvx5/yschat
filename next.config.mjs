@@ -6,9 +6,6 @@ const nextConfig = {
   // Disable source maps in production
   productionBrowserSourceMaps: false,
   
-  // Use SWC minifier
-  swcMinify: true,
-  
   // Reduce image optimization memory usage
   images: {
     minimumCacheTTL: 60,

@@ -3,9 +3,9 @@ import { ThemeAppearance } from 'antd-style';
 import { ResolvingViewport } from 'next';
 import { ReactNode } from 'react';
 import { isRtlLang } from 'rtl-detect';
-import dynamic from 'next/dynamic';
 
 import Analytics from '@/components/Analytics';
+import AuthWrapperClient from '@/components/Auth/AuthWrapperClient';
 import { DEFAULT_LANG } from '@/const/locale';
 import PWAInstall from '@/features/PWAInstall';
 import AuthProvider from '@/layout/AuthProvider';
@@ -13,11 +13,6 @@ import GlobalProvider from '@/layout/GlobalProvider';
 import { Locales } from '@/locales/resources';
 import { DynamicLayoutProps } from '@/types/next';
 import { RouteVariants } from '@/utils/server/routeVariants';
-
-// Dynamically import AuthWrapper to reduce build memory usage
-const AuthWrapper = dynamic(() => import('@/components/Auth/AuthWrapper'), {
-  ssr: false
-});
 
 const inVercel = process.env.VERCEL === '1';
 
@@ -47,10 +42,10 @@ const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
           <AuthProvider>
             {inVercel ? (
               // Only use AuthWrapper in production (Vercel) environments
-              <AuthWrapper>
+              <AuthWrapperClient>
                 {children}
                 {!isMobile && modal}
-              </AuthWrapper>
+              </AuthWrapperClient>
             ) : (
               // In development, skip authentication to reduce build memory usage
               <>
