@@ -23,7 +23,6 @@ const defaultLeftActions: ActionKeys[] = [
   'model',
   'search',
   'fileUpload',
-  'knowledgeBase',
   'history',
   'tools',
   'params',

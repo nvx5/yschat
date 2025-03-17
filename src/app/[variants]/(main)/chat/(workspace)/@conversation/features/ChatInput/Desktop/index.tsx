@@ -14,7 +14,6 @@ const leftActions = [
   'model',
   'search',
   'fileUpload',
-  'knowledgeBase',
   'params',
   'history',
   'stt',

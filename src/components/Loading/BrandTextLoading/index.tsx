@@ -1,4 +1,4 @@
-import { BrandLoading, LobeChatText } from '@lobehub/ui/brand';
+import { BrandLoading } from '@lobehub/ui/brand';
 import { FC } from 'react';
 import { Center } from 'react-layout-kit';
 
