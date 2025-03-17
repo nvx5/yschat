@@ -40,7 +40,6 @@ const Header = memo(() => {
     <Flexbox className={styles.top} gap={16} padding={16}>
       <Flexbox distribution={'space-between'} horizontal>
         <Flexbox align={'center'} gap={4} horizontal>
-          <div className={styles.logo} style={{ fontSize: '20px', fontWeight: 'bold' }}>Home</div>
           {enableWebrtc && <SyncStatusTag />}
         </Flexbox>
         <Flexbox gap={8} horizontal>
