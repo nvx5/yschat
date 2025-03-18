@@ -3,7 +3,7 @@
 import { Icon } from '@lobehub/ui';
 import { MobileTabBar, type MobileTabBarProps } from '@lobehub/ui/mobile';
 import { createStyles } from 'antd-style';
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, Settings, Compass } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { rgba } from 'polished';
 import { memo, useMemo } from 'react';
@@ -43,6 +43,26 @@ const NavBar = memo(() => {
           router.push('/chat');
         },
         title: t('tab.chat'),
+      },
+      {
+        icon: (active: boolean) => (
+          <Icon className={active ? styles.active : undefined} icon={Compass} />
+        ),
+        key: SidebarTabKey.Discover,
+        onClick: () => {
+          router.push('/discover');
+        },
+        title: t('tab.discover'),
+      },
+      {
+        icon: (active: boolean) => (
+          <Icon className={active ? styles.active : undefined} icon={Settings} />
+        ),
+        key: SidebarTabKey.Setting,
+        onClick: () => {
+          router.push('/settings');
+        },
+        title: t('tab.setting'),
       },
     ],
     [t],

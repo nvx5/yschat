@@ -2,7 +2,7 @@
 
 import { ActionIcon } from '@lobehub/ui';
 import { MobileNavBar } from '@lobehub/ui/mobile';
-import { MessageSquarePlus } from 'lucide-react';
+import { MessageSquarePlus, Settings, Compass } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -16,7 +16,7 @@ import { mobileHeaderSticky } from '@/styles/mobileHeader';
 const Header = memo(() => {
   const [createSession] = useSessionStore((s) => [s.createSession]);
   const router = useRouter();
-  const { enableWebrtc, showCreateSession } = useServerConfigStore(featureFlagsSelectors);
+  const { enableWebrtc, showCreateSession, showMarket } = useServerConfigStore(featureFlagsSelectors);
 
   return (
     <MobileNavBar
@@ -27,13 +27,27 @@ const Header = memo(() => {
         </Flexbox>
       }
       right={
-        showCreateSession && (
+        <Flexbox gap={8} horizontal>
+          {showMarket && (
+            <ActionIcon
+              icon={Compass}
+              onClick={() => router.push('/discover')}
+              size={MOBILE_HEADER_ICON_SIZE}
+            />
+          )}
           <ActionIcon
-            icon={MessageSquarePlus}
-            onClick={() => createSession()}
+            icon={Settings}
+            onClick={() => router.push('/settings')}
             size={MOBILE_HEADER_ICON_SIZE}
           />
-        )
+          {showCreateSession && (
+            <ActionIcon
+              icon={MessageSquarePlus}
+              onClick={() => createSession()}
+              size={MOBILE_HEADER_ICON_SIZE}
+            />
+          )}
+        </Flexbox>
       }
       style={mobileHeaderSticky}
     />

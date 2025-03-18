@@ -26,7 +26,7 @@ const MobileHeader = memo(() => {
       right={
         <>
           <ShareButton mobile open={open} setOpen={setOpen} />
-          {isAgentEditable && <SettingButton mobile />}
+          <SettingButton mobile />
         </>
       }
       showBackButton
