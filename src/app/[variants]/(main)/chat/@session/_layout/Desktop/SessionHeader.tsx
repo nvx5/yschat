@@ -26,6 +26,12 @@ export const useStyles = createStyles(({ css, token }) => ({
     position: sticky;
     inset-block-start: 0;
   `,
+  yschatText: css`
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-right: 8px;
+  `,
 }));
 
 const Header = memo(() => {
@@ -40,6 +46,7 @@ const Header = memo(() => {
     <Flexbox className={styles.top} gap={16} padding={16}>
       <Flexbox distribution={'space-between'} horizontal>
         <Flexbox align={'center'} gap={4} horizontal>
+          <div className={styles.yschatText}>yschat</div>
           {enableWebrtc && <SyncStatusTag />}
         </Flexbox>
         <Flexbox gap={8} horizontal>
